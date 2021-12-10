@@ -179,7 +179,7 @@ class TitleState extends MusicBeatState
     
     daninnocentTxt.screenCenter()
     
-    var playButton:FlxButton
+    var playButton:FlxButton;
 
     playButton = new FlxButton(120, 0, "Play", clickPlay);
     playButton.y = daninnocentTxt.y + 80
