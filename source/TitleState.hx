@@ -182,13 +182,13 @@ class TitleState extends MusicBeatState
     var playButton:FlxButton;
 
     playButton = new FlxButton(120, 0, "Play", clickPlay);
-    playButton.y = daninnocentTxt.y + 80
+    playButton.y = daninnocentTxt.y + 80;
     add(playButton);
     
     var optionsButton:FlxButton
 
     optionsButton = new FlxButton(-120, 0, "Options", clickOptions);
-    optionsButton.y = daninnocentTxt.y + 80
+    optionsButton.y = daninnocentTxt.y + 80;
     add(optionsButton);
  
 		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
