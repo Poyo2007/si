@@ -177,7 +177,7 @@ class TitleState extends MusicBeatState
     daninnocentTxt.scrollFactor.set();
     add(daninnocentTxt);
     
-    daninnocentTxt.screenCenter()
+    daninnocentTxt.screenCenter;
     
     var playButton:FlxButton;
 
