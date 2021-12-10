@@ -185,7 +185,7 @@ class TitleState extends MusicBeatState
     playButton.y = daninnocentTxt.y + 80;
     add(playButton);
     
-    var optionsButton:FlxButton
+    var optionsButton:FlxButton;
 
     optionsButton = new FlxButton(-120, 0, "Options", clickOptions);
     optionsButton.y = daninnocentTxt.y + 80;
