@@ -423,7 +423,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT");
 				addOffset("singDOWN");
 				
-				playAnim("idle"):
+				playAnim("idle");
 
 			case 'bf-christmas':
 				var tex = Paths.getSparrowAtlas('christmas/bfChristmas');
