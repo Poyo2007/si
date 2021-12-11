@@ -29,16 +29,16 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
 	#if !switch
-	var optionShit:Array<String> = ['story mode', 'freeplay', 'donate', 'options'];
+	var optionShit:Array<String> = ['story mode', 'options'];
 	#else
-	var optionShit:Array<String> = ['story mode', 'freeplay'];
+	var optionShit:Array<String> = ['story mode'];
 	#end
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
 	var newInput:Bool = true;
 
-	public static var nightly:String = "-Nightly2";
+	public static var nightly:String = "thanks for da gifts everyone -Poyo";
 
 	public static var kadeEngineVer:String = "1.4.1" + nightly;
 	public static var gameVer:String = "0.2.7.1";
@@ -193,7 +193,10 @@ class MainMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'story mode':
-										FlxG.switchState(new StoryMenuState());
+										PlayState.SONG = Song.loadFromJson('triple-trouble');
+              			PlayState.isStoryMode = false;
+              			PlayState.storyDifficulty = 2;
+              			LoadingState.loadAndSwitchState(new PlayState());
 										trace("Story Menu Selected");
 									case 'freeplay':
 										FlxG.switchState(new FreeplayState());

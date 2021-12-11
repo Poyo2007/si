@@ -151,6 +151,8 @@ class PlayState extends MusicBeatState
 	var upperBoppers:FlxSprite;
 	var bottomBoppers:FlxSprite;
 	var santa:FlxSprite;
+	
+	var floaty:Float = 0;
 
 	var fc:Bool = true;
 
@@ -656,40 +658,23 @@ class PlayState extends MusicBeatState
 
 		switch (SONG.player2)
 		{
-			case 'gf':
-				dad.setPosition(gf.x, gf.y);
-				gf.visible = false;
-				if (isStoryMode)
-				{
-					camPos.x += 600;
-					tweenCamIn();
-				}
-
-			case "spooky":
-				dad.y += 200;
-			case "monster":
-				dad.y += 100;
-			case 'monster-christmas':
-				dad.y += 130;
-			case 'dad':
-				camPos.x += 400;
-			case 'pico':
-				camPos.x += 600;
-				dad.y += 300;
-			case 'parents-christmas':
-				dad.x -= 500;
-			case 'senpai':
-				dad.x += 150;
-				dad.y += 360;
-				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-			case 'senpai-angry':
-				dad.x += 150;
-				dad.y += 360;
-				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-			case 'spirit':
-				dad.x -= 150;
-				dad.y += 100;
-				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+	  case 'hd':
+  		dad.x += -50;
+      dad.y += 200
+    case 'zack'
+      dad.y += 325
+    case 'neto'
+      dad.y += 325
+    case 'nafri'
+      dad.y += 325
+    case 'bestbud'
+      dad.y += 100
+		}
+		
+		switch (SONG.player1)
+		{
+		  case 'bf-poyo':
+			  boyfriend.y += 100;
 		}
 
 
@@ -851,6 +836,14 @@ class PlayState extends MusicBeatState
 			{
 				add(replayTxt);
 			}
+			
+		if (dad.curCharacter == "klav" || dad.curCharacter == "fleetway") // Do you really wanna see sonic.exe fly? Me neither.
+		{
+			if (tailscircle == 'hovering' || tailscircle == 'circling')
+				dad.y += Math.sin(floaty) * 1.3;
+			if (tailscircle == 'circling')
+				dad.x += Math.cos(floaty) * 1.3; // math B)
+		}
 
 		iconP1 = new HealthIcon(SONG.player1, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
@@ -3150,6 +3143,107 @@ class PlayState extends MusicBeatState
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
 		{
 			resyncVocals();
+		}
+		
+		if (curSong.toLowerCase() == 'triple-trouble')
+		{
+			switch (curStep)
+			{
+				case 1:
+					doP3Static(); // cool static
+					FlxTween.tween(FlxG.camera, {zoom: 1.1}, 2, {ease: FlxEase.cubeOut});
+					defaultCamZoom = 1.1;
+				case 1024, 1088, 1216, 1280, 2305, 2810, 3199, 4096:
+					doP3Static();
+				case 1040: // switch to sonic facing right
+
+					FlxTween.tween(FlxG.camera, {zoom: 0.9}, 2, {ease: FlxEase.cubeOut});
+					defaultCamZoom = 0.9;
+
+					remove(dad);
+					dad = new Character('neto');
+					add(dad);
+
+				case 1296: // switch to knuckles facing left facing right and bf facing right, and cool static
+
+					FlxTween.tween(FlxG.camera, {zoom: 1.1}, 2, {ease: FlxEase.cubeOut});
+					defaultCamZoom = 1.1;
+
+					remove(dad);
+					dad = new Character(1300 + 100 - 206, 260 + 44, 'hd');
+					add(dad);
+
+					cpuStrums.forEach(function(spr:FlxSprite)
+					{
+						if (!FlxG.save.data.midscroll)
+							FlxTween.tween(spr, {x: spr.x += 700, y: spr.y}, 5, {ease: FlxEase.quartOut});
+						// spr.x += 700;
+					});
+					playerStrums.forEach(function(spr:FlxSprite)
+					{
+						if (!FlxG.save.data.midscroll)
+							FlxTween.tween(spr, {x: spr.x -= 600, y: spr.y}, 5, {ease: FlxEase.quartOut});
+						// spr.x -= 600;
+					});
+
+					dad.flipX = true;
+					
+					remove(boyfriend);
+					boyfriend = new Boyfriend(466.1, 685.6 - 300, 'bf-poyo');
+					add(boyfriend);
+
+					boyfriend.flipX = true;
+
+				case 2320:
+					FlxTween.tween(FlxG.camera, {zoom: 0.9}, 2, {ease: FlxEase.cubeOut});
+					defaultCamZoom = 0.9;
+
+					remove(dad);
+					dad = new Character('klav');
+					add(dad);
+
+					// dad.camFollow.y = dad.getMidpoint().y - 100;
+					// dad.camFollow.x = dad.getMidpoint().x - 500;
+
+					dad.flipX = true;
+				case 2823:
+
+					FlxTween.tween(FlxG.camera, {zoom: 1}, 2, {ease: FlxEase.cubeOut});
+					defaultCamZoom = 1;
+
+					cpuStrums.forEach(function(spr:FlxSprite)
+					{
+						if (!FlxG.save.data.midscroll)
+							FlxTween.tween(spr, {x: spr.x -= 700, y: spr.y}, 5, {ease: FlxEase.quartOut});
+						// spr.x -= 700;
+					});
+					playerStrums.forEach(function(spr:FlxSprite)
+					{
+						if (!FlxG.save.data.midscroll)
+							FlxTween.tween(spr, {x: spr.x += 600, y: spr.y}, 5, {ease: FlxEase.quartOut});
+						// spr.x += 600;
+					});
+
+					remove(dad);
+					dad = new Character(20 - 200, 30 + 200, 'zack');
+					add(dad);
+
+					// dad.camFollow.y = dad.getMidpoint().y;
+					// dad.camFollow.x = dad.getMidpoint().x + 300;
+
+					dad.flipX = false;
+					
+					boyfriend.flipX = false;
+
+					remove(boyfriend);
+					boyfriend = new Boyfriend(466.1 + 200, 685.6 - 250, 'bf-poyo');
+					add(boyfriend);
+	
+				case 4111:
+					remove(dad);
+					dad = new Character('bestbud');
+					add(dad);
+			}
 		}
 
 		if (dad.curCharacter == 'spooky' && curStep % 4 == 2)

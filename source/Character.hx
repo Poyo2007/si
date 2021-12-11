@@ -304,6 +304,126 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 				flipX = true;
+				
+			case 'nafri':
+				var tex = Paths.getSparrowAtlas('Phase3/N_A_F_R_I','shared');
+				frames = tex;
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+
+				addOffset('idle', -5);
+				addOffset("singUP", -29, 27);
+				addOffset("singRIGHT", -38, -7);
+				addOffset("singLEFT", 12, -6);
+				addOffset("singDOWN", -10, -50);
+
+				playAnim('idle');
+			case 'zack':
+				var tex = Paths.getSparrowAtlas('Phase3/zack','shared');
+				frames = tex;
+				animation.addByPrefix('idle', 'BF idle dance', 24, false);
+				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
+				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
+
+				addOffset('idle', -5);
+				addOffset("singUP", -29, 27);
+				addOffset("singRIGHT", -38, -7);
+				addOffset("singLEFT", 12, -6);
+				addOffset("singDOWN", -10, -50);
+
+				playAnim('idle');
+				
+			case 'neto':
+				var tex = Paths.getSparrowAtlas('Phase3/neto','shared');
+				frames = tex;
+				animation.addByPrefix('idle', 'BF idle dance', 24, false);
+				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
+				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
+
+				addOffset('idle', -5);
+				addOffset("singUP", -29, 27);
+				addOffset("singRIGHT", -38, -7);
+				addOffset("singLEFT", 12, -6);
+				addOffset("singDOWN", -10, -50);
+
+				playAnim('idle');
+
+				flipX = true;
+			
+			case 'hd':
+				var tex = Paths.getSparrowAtlas('Phase3/144p','shared');
+				frames = tex;
+				
+				animation.addByPrefix('idle', 'Dad idle dance', 24, false);
+				animation.addByPrefix('singUP', 'Dad Sing Note UP', 24, false);
+				animation.addByPrefix('singLEFT', 'Dad Sing Note LEFT', 24, false);
+				animation.addByPrefix('singRIGHT', 'Dad Sing Note RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'Dad Sing Note DOWN', 24, false);
+
+				addOffset('idle', 0, 4);
+				addOffset("singUP", -6, 59);
+				addOffset("singRIGHT", 0, 32);
+				addOffset("singLEFT", -9, 15);
+				addOffset("singDOWN", 0, -24);
+
+				playAnim('idle');
+				
+						case 'bestbud':
+				var tex = Paths.getSparrowAtlas('Phase3/bestbud','shared');
+				frames = tex;
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+        animation.addByPrefix('singLEFT', 'Right', 24, false);
+				animation.addByPrefix('singRIGHT', 'Left', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", 94, 8);
+				addOffset("singRIGHT", 50, 0);
+				addOffset("singLEFT", 181, 0);
+				addOffset("singDOWN", 0, -47);
+
+				playAnim('idle');
+				
+			case 'bf-poyo':
+				var tex = Paths.getSparrowAtlas('Phase3/Poyo','shared');
+				frames = tex;
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+        animation.addByPrefix('singLEFT', 'Right', 24, false);
+				animation.addByPrefix('singRIGHT', 'Left', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", 94, 8);
+				addOffset("singRIGHT", 50, 0);
+				addOffset("singLEFT", 181, 0);
+				addOffset("singDOWN", 0, -47);
+
+				playAnim('idle');
+				
+			case 'klav'
+        var tex = Paths.getSparrowAtlas('Phase3/real','shared');
+				animation.addByPrefix('idle', 'down', 24, false);
+				animation.addByPrefix('singUP', 'up', 24, false);
+        animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
+				
+				playAnim("idle")
 
 			case 'bf-christmas':
 				var tex = Paths.getSparrowAtlas('christmas/bfChristmas');

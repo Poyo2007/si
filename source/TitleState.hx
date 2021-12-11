@@ -17,7 +17,6 @@ import flixel.math.FlxRect;
 import flixel.system.FlxSound;
 import flixel.system.ui.FlxSoundTray;
 import flixel.text.FlxText;
-import flixel.ui.FlxButton;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
@@ -169,28 +168,33 @@ class TitleState extends MusicBeatState
 		// bg.updateHitbox();
 		add(bg);
 
-		var daninnocentTxt:FlxText;
+		logoBl = new FlxSprite(-150, -100);
+		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+		logoBl.antialiasing = true;
+		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
+		logoBl.animation.play('bump');
+		logoBl.updateHitbox();
+		// logoBl.screenCenter();
+		// logoBl.color = FlxColor.BLACK;
 
-    daninnocentTxt = new FlxText();
-    daninnocentTxt.text = "Triple Trouble but me and my friends sing it";
-    daninnocentTxt.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
-    daninnocentTxt.scrollFactor.set();
-    add(daninnocentTxt);
-    
-    daninnocentTxt.screenCenter;
-    
-    var playButton:FlxButton;
+		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
+		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
+		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+		gfDance.antialiasing = true;
+		add(gfDance);
+		add(logoBl);
 
-    playButton = new FlxButton(120, 0, "Play", clickPlay);
-    playButton.y = daninnocentTxt.y + 80;
-    add(playButton);
-    
-    var optionsButton:FlxButton;
+		titleText = new FlxSprite(100, FlxG.height * 0.8);
+		titleText.frames = Paths.getSparrowAtlas('titleEnter');
+		titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
+		titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
+		titleText.antialiasing = true;
+		titleText.animation.play('idle');
+		titleText.updateHitbox();
+		// titleText.screenCenter(X);
+		add(titleText);
 
-    optionsButton = new FlxButton(-120, 0, "Options", clickOptions);
-    optionsButton.y = daninnocentTxt.y + 80;
-    add(optionsButton);
- 
 		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
 		logo.screenCenter();
 		logo.antialiasing = true;
@@ -232,8 +236,6 @@ class TitleState extends MusicBeatState
 
 		// credGroup.add(credTextShit);
 	}
-	
-	
 
 	function getIntroTextShit():Array<Array<String>>
 	{
@@ -264,8 +266,8 @@ class TitleState extends MusicBeatState
 		}
 
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER;
-		
-  	#if mobile
+
+		#if mobile
 		for (touch in FlxG.touches.list)
 		{
 			if (touch.justPressed)
@@ -277,6 +279,69 @@ class TitleState extends MusicBeatState
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
+		if (gamepad != null)
+		{
+			if (gamepad.justPressed.START)
+				pressedEnter = true;
+
+			#if switch
+			if (gamepad.justPressed.B)
+				pressedEnter = true;
+			#end
+		}
+
+		if (pressedEnter && !transitioning && skippedIntro)
+		{
+			#if newgrounds
+			#if !switch
+			NGio.unlockMedal(60960);
+
+			// If it's Friday according to da clock
+			if (Date.now().getDay() == 5)
+				NGio.unlockMedal(61034);
+			#end
+			#end
+
+			titleText.animation.play('press');
+
+			FlxG.camera.flash(FlxColor.WHITE, 1);
+			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+
+			transitioning = true;
+			// FlxG.sound.music.stop();
+
+			new FlxTimer().start(2, function(tmr:FlxTimer)
+			{
+
+				// Get current version of Kade Engine
+
+				var http = new haxe.Http("https://raw.githubusercontent.com/KadeDev/Kade-Engine/master/version.downloadMe");
+
+				http.onData = function (data:String) {
+				  
+				  	if (!MainMenuState.kadeEngineVer.contains(data.trim()) && !OutdatedSubState.leftState && MainMenuState.nightly == "")
+					{
+						trace('outdated lmao! ' + data.trim() + ' != ' + MainMenuState.kadeEngineVer);
+						OutdatedSubState.needVer = data;
+						FlxG.switchState(new OutdatedSubState());
+					}
+					else
+					{
+						FlxG.switchState(new MainMenuState());
+					}
+				}
+				
+				http.onError = function (error) {
+				  trace('error: $error');
+				  FlxG.switchState(new MainMenuState()); // fail but we go anyway
+				}
+				
+				http.request();
+
+			});
+			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
+		}
+
 		if (pressedEnter && !skippedIntro)
 		{
 			skipIntro();
@@ -284,18 +349,6 @@ class TitleState extends MusicBeatState
 
 		super.update(elapsed);
 	}
-	
-	function clickPlay()
- {
-     PlayState.SONG = Song.loadFromJson('bopeebo');
-     PlayState.storyDifficulty = 2;
-     LoadingState.loadAndSwitchState(new PlayState());
- }
- 
- function clickOptions()
- {
-     FlxG.switchState(new OptionsMenu());
- }
 
 	function createCoolText(textArray:Array<String>)
 	{
