@@ -3201,7 +3201,7 @@ class PlayState extends MusicBeatState
 					defaultCamZoom = 0.9;
 
 					remove(dad);
-					dad = new Character('klav'());
+					dad = new Character('klav');
 					add(dad);
 
 					// dad.camFollow.y = dad.getMidpoint().y - 100;
@@ -3230,7 +3230,7 @@ class PlayState extends MusicBeatState
 	
 				case 4111:
 					remove(dad);
-					dad = new Character('bestbud'());
+					dad = new Character('bestbud');
 					add(dad);
 			}
 		}
