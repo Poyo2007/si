@@ -136,6 +136,8 @@ class PlayState extends MusicBeatState
 	var currentFrames:Int = 0;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
+	
+	var daP3Static:FlxSprite = new FlxSprite(0, 0);
 
 	var halloweenBG:FlxSprite;
 	var isHalloween:Bool = false;
@@ -3173,10 +3175,6 @@ class PlayState extends MusicBeatState
 				case 1024, 1088, 1216, 1280, 2305, 2810, 3199, 4096:
 					doP3Static();
 				case 1040: // switch to sonic facing right
-
-					FlxTween.tween(FlxG.camera, {zoom: 0.9}, 2, {ease: FlxEase.cubeOut});
-					defaultCamZoom = 0.9;
-
 					remove(dad);
 					dad = new Character('neto');
 					add(dad);
@@ -3203,7 +3201,7 @@ class PlayState extends MusicBeatState
 					defaultCamZoom = 0.9;
 
 					remove(dad);
-					dad = new Character('klav');
+					dad = new Character('klav'());
 					add(dad);
 
 					// dad.camFollow.y = dad.getMidpoint().y - 100;
@@ -3232,7 +3230,7 @@ class PlayState extends MusicBeatState
 	
 				case 4111:
 					remove(dad);
-					dad = new Character('bestbud');
+					dad = new Character('bestbud'());
 					add(dad);
 			}
 		}
