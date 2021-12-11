@@ -3191,7 +3191,7 @@ class PlayState extends MusicBeatState
 					dad.flipX = true;
 					
 					remove(boyfriend);
-					boyfriend = new Boyfriend(100, 100'bf-poyo');
+					boyfriend = new Boyfriend(100, 100, 'bf-poyo');
 					add(boyfriend);
 
 					boyfriend.flipX = true;
@@ -3201,7 +3201,7 @@ class PlayState extends MusicBeatState
 					defaultCamZoom = 0.9;
 
 					remove(dad);
-					dad = new Character(770, 100 'klav');
+					dad = new Character(770, 100, 'klav');
 					add(dad);
 
 					// dad.camFollow.y = dad.getMidpoint().y - 100;
