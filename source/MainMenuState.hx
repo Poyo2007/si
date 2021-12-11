@@ -38,7 +38,7 @@ class MainMenuState extends MusicBeatState
 	var newGaming2:FlxText;
 	var newInput:Bool = true;
 
-	public static var nightly:String = "thanks for da gifts everyone -Poyo";
+	public static var nightly:String = "";
 
 	public static var kadeEngineVer:String = "1.4.1" + nightly;
 	public static var gameVer:String = "0.2.7.1";
@@ -105,7 +105,7 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollow, null, 0.60 * (60 / FlxG.save.data.fpsCap));
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, gameVer + " FNF - " + kadeEngineVer + " Kade Engine", 12);
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, gameVer + " FNF - " + kadeEngineVer + "BY RP4", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -193,10 +193,7 @@ class MainMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'story mode':
-										PlayState.SONG = Song.loadFromJson('triple-trouble');
-              			PlayState.isStoryMode = false;
-              			PlayState.storyDifficulty = 2;
-              			LoadingState.loadAndSwitchState(new PlayState());
+										FlxG.switchState(new StoryMenuState());
 										trace("Story Menu Selected");
 									case 'freeplay':
 										FlxG.switchState(new FreeplayState());
