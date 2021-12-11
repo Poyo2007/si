@@ -3176,7 +3176,7 @@ class PlayState extends MusicBeatState
 					doP3Static();
 				case 1040: // switch to sonic facing right
 					remove(dad);
-					dad = new Character('neto');
+					dad = new Character(100, 100, 'neto');
 					add(dad);
 
 				case 1296: // switch to knuckles facing left facing right and bf facing right, and cool static
@@ -3185,13 +3185,13 @@ class PlayState extends MusicBeatState
 					defaultCamZoom = 1.1;
 
 					remove(dad);
-					dad = new Character(1300 + 100 - 206, 260 + 44, 'hd');
+					dad = new Character(770, 100, 'hd');
 					add(dad);
 
 					dad.flipX = true;
 					
 					remove(boyfriend);
-					boyfriend = new Boyfriend(466.1, 685.6 - 300, 'bf-poyo');
+					boyfriend = new Boyfriend(100, 100'bf-poyo');
 					add(boyfriend);
 
 					boyfriend.flipX = true;
@@ -3201,7 +3201,7 @@ class PlayState extends MusicBeatState
 					defaultCamZoom = 0.9;
 
 					remove(dad);
-					dad = new Character('klav');
+					dad = new Character(770, 100 'klav');
 					add(dad);
 
 					// dad.camFollow.y = dad.getMidpoint().y - 100;
@@ -3214,7 +3214,7 @@ class PlayState extends MusicBeatState
 					defaultCamZoom = 1;
 
 					remove(dad);
-					dad = new Character(20 - 200, 30 + 200, 'zack');
+					dad = new Character(100, 100, 'zack');
 					add(dad);
 
 					// dad.camFollow.y = dad.getMidpoint().y;
@@ -3225,12 +3225,12 @@ class PlayState extends MusicBeatState
 					boyfriend.flipX = false;
 
 					remove(boyfriend);
-					boyfriend = new Boyfriend(466.1 + 200, 685.6 - 250, 'bf-poyo');
+					boyfriend = new Boyfriend(770, 100, 'bf-poyo');
 					add(boyfriend);
 	
 				case 4111:
 					remove(dad);
-					dad = new Character('bestbud');
+					dad = new Character(100, 100, 'bestbud');
 					add(dad);
 			}
 		}
