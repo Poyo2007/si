@@ -661,13 +661,13 @@ class PlayState extends MusicBeatState
 	  case 'hd':
   		dad.x += -50;
       dad.y += 200
-    case 'zack'
+    case 'zack':
       dad.y += 325
-    case 'neto'
+    case 'neto':
       dad.y += 325
-    case 'nafri'
+    case 'nafri':
       dad.y += 325
-    case 'bestbud'
+    case 'bestbud':
       dad.y += 100
 		}
 		
