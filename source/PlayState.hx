@@ -153,6 +153,7 @@ class PlayState extends MusicBeatState
 	var santa:FlxSprite;
 	
 	var floaty:Float = 0;
+	var tailscircle:String = '';
 
 	var fc:Bool = true;
 
@@ -956,6 +957,34 @@ class PlayState extends MusicBeatState
 			rep = new Replay("na");
 
 		super.create();
+	}
+	
+	function doP3Static()
+	{
+		trace('p3static XDXDXD');
+
+		daP3Static.frames = Paths.getSparrowAtlas('Phase3Static', 'shared');
+		daP3Static.animation.addByPrefix('P3Static', 'Phase3Static instance 1', 24, false);
+
+		daP3Static.screenCenter();
+
+		daP3Static.scale.x = 4;
+		daP3Static.scale.y = 4;
+		daP3Static.alpha = 0.5;
+
+		daP3Static.cameras = [camHUD];
+
+		add(daP3Static);
+
+		daP3Static.animation.play('P3Static');
+
+		daP3Static.animation.finishCallback = function(pog:String)
+		{
+			trace('ended p3static');
+			daP3Static.alpha = 0;
+
+			remove(daP3Static);
+		}
 	}
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
@@ -3125,18 +3154,6 @@ class PlayState extends MusicBeatState
 		startedMoving = false;
 	}
 
-	function lightningStrikeShit():Void
-	{
-		FlxG.sound.play(Paths.soundRandom('thunder_', 1, 2));
-		halloweenBG.animation.play('lightning');
-
-		lightningStrikeBeat = curBeat;
-		lightningOffset = FlxG.random.int(8, 24);
-
-		boyfriend.playAnim('scared', true);
-		gf.playAnim('scared', true);
-	}
-
 	override function stepHit()
 	{
 		super.stepHit();
@@ -3173,19 +3190,6 @@ class PlayState extends MusicBeatState
 					dad = new Character(1300 + 100 - 206, 260 + 44, 'hd');
 					add(dad);
 
-					cpuStrums.forEach(function(spr:FlxSprite)
-					{
-						if (!FlxG.save.data.midscroll)
-							FlxTween.tween(spr, {x: spr.x += 700, y: spr.y}, 5, {ease: FlxEase.quartOut});
-						// spr.x += 700;
-					});
-					playerStrums.forEach(function(spr:FlxSprite)
-					{
-						if (!FlxG.save.data.midscroll)
-							FlxTween.tween(spr, {x: spr.x -= 600, y: spr.y}, 5, {ease: FlxEase.quartOut});
-						// spr.x -= 600;
-					});
-
 					dad.flipX = true;
 					
 					remove(boyfriend);
@@ -3211,19 +3215,6 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(FlxG.camera, {zoom: 1}, 2, {ease: FlxEase.cubeOut});
 					defaultCamZoom = 1;
 
-					cpuStrums.forEach(function(spr:FlxSprite)
-					{
-						if (!FlxG.save.data.midscroll)
-							FlxTween.tween(spr, {x: spr.x -= 700, y: spr.y}, 5, {ease: FlxEase.quartOut});
-						// spr.x -= 700;
-					});
-					playerStrums.forEach(function(spr:FlxSprite)
-					{
-						if (!FlxG.save.data.midscroll)
-							FlxTween.tween(spr, {x: spr.x += 600, y: spr.y}, 5, {ease: FlxEase.quartOut});
-						// spr.x += 600;
-					});
-
 					remove(dad);
 					dad = new Character(20 - 200, 30 + 200, 'zack');
 					add(dad);
@@ -3244,11 +3235,6 @@ class PlayState extends MusicBeatState
 					dad = new Character('bestbud');
 					add(dad);
 			}
-		}
-
-		if (dad.curCharacter == 'spooky' && curStep % 4 == 2)
-		{
-			// dad.dance();
 		}
 
 
@@ -3374,11 +3360,6 @@ class PlayState extends MusicBeatState
 					trainCooldown = FlxG.random.int(-4, 0);
 					trainStart();
 				}
-		}
-
-		if (isHalloween && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
-		{
-			lightningStrikeShit();
 		}
 	}
 
