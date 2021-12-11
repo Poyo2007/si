@@ -660,15 +660,15 @@ class PlayState extends MusicBeatState
 		{
 	  case 'hd':
   		dad.x += -50;
-      dad.y += 200
+      dad.y += 200:
     case 'zack':
-      dad.y += 325
+      dad.y += 325;
     case 'neto':
-      dad.y += 325
+      dad.y += 325;
     case 'nafri':
-      dad.y += 325
+      dad.y += 325;
     case 'bestbud':
-      dad.y += 100
+      dad.y += 100;
 		}
 		
 		switch (SONG.player1)
@@ -679,7 +679,7 @@ class PlayState extends MusicBeatState
 
 
 		
-		boyfriend = new Boyfriend(770, 450, SONG.player1);
+		boyfriend = new Boyfriend(770, 100, SONG.player1);
 
 		// REPOSITIONING PER STAGE
 		switch (curStage)
