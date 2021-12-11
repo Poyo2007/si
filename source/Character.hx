@@ -409,7 +409,7 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 				
-			case 'klav'
+			case 'klav':
         var tex = Paths.getSparrowAtlas('Phase3/real','shared');
 				animation.addByPrefix('idle', 'down', 24, false);
 				animation.addByPrefix('singUP', 'up', 24, false);
